@@ -1,0 +1,27 @@
+version: '2'
+
+services:
+
+  api:
+    build: ./api
+    links:
+      - postgres
+    volumes:
+      - ./api:/var/www/html
+    ports:
+      - "9000:9000"
+
+  nginx:
+    image: nginx:latest
+    volumes_from:
+      - api
+    links:
+      - api
+    ports:
+      - "8890:80"
+    command: nginx -g 'daemon off;'
+
+  postgres:
+    image: postgres:9.5
+    ports:
+      - "5432:5432"
