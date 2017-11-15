@@ -39,3 +39,5 @@ RUN apt-get update \
     # Next composer and global composer package, as their versions may change from time to time
     && curl -sS https://getcomposer.org/installer | php \
     && mv composer.phar /usr/local/bin/composer.phar
+
+COPY . /var/www/html

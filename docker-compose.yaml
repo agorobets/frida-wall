@@ -13,6 +13,8 @@ services:
 
   nginx:
     image: nginx:latest
+    volumes:
+      - ./conf/nginx/api.conf:/etc/nginx/conf.d/default.conf
     volumes_from:
       - api
     links:
@@ -25,3 +27,7 @@ services:
     image: postgres:9.5
     ports:
       - "5432:5432"
+    environment:
+      - POSTGRES_USER=frida_wall
+      - POSTGRES_PASSWORD=frida_wall
+      - POSTGRES_DB=frida_wall
