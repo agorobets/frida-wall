@@ -14,15 +14,20 @@ class CreatePetsTable extends Migration
     public function up()
     {
         Schema::create('pets', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('user_id');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('owner_id');
+            $table->unsignedInteger('kind_id');
             $table->unsignedInteger('breed_id');
             $table->string('nickname', 60)->unique();
-            $table->string('name', 255);
+            $table->string('display_name', 255);
             $table->text('description')->nullable();
             $table->dateTime('born_at')->nullable();
             $table->dateTime('died_at')->nullable();
-            $table->smallInteger('age')->nullable();
+            $table->unsignedSmallInteger('age')->nullable();
+            $table->string('gender', 1)->nullable();
+            $table->unsignedInteger('color')->nullable();
+            $table->unsignedSmallInteger('status');
+
             $table->timestamps();
         });
     }

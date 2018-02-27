@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateStoriesTable extends Migration
+class CreateKindsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateStoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('stories', function (Blueprint $table) {
+        Schema::create('kinds', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('pet_id');
-            $table->smallInteger('type');
-            $table->text('payload');
+            $table->string('name', 255)->unique();
+            $table->unsignedSmallInteger('status');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateStoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('stories');
+        Schema::dropIfExists('kinds');
     }
 }
