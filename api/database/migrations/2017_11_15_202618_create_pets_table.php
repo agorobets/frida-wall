@@ -25,10 +25,13 @@ class CreatePetsTable extends Migration
             $table->dateTime('died_at')->nullable();
             $table->unsignedSmallInteger('age')->nullable();
             $table->string('gender', 1)->nullable();
-            $table->unsignedInteger('color')->nullable();
             $table->unsignedSmallInteger('status');
-
             $table->timestamps();
+
+            $table->index('owner_id');
+            $table->index('kind_id');
+            $table->index('breed_id');
+
         });
     }
 

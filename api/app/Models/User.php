@@ -9,17 +9,13 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    const STATUS_NEW = 0;
-    const STATUS_ACTIVE = 1;
-    const STATUS_BLOCKED = 2;
-
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'username', 'email', 'password',
     ];
 
     /**
@@ -37,5 +33,13 @@ class User extends Authenticatable
     public function pets()
     {
         return $this->hasMany(Pet::class, 'owner_id');
+    }
+
+    /**
+     * @param string $value
+     */
+    public function setUsernameAttribute(string $value)
+    {
+        $this->attributes['username'] = strtolower($value);
     }
 }

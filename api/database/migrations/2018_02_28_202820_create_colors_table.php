@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBreedsTable extends Migration
+class CreateColorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,17 @@ class CreateBreedsTable extends Migration
      */
     public function up()
     {
-        Schema::create('breeds', function (Blueprint $table) {
+        Schema::create('colors', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('kind_id');
             $table->string('name', 255)->unique();
             $table->unsignedSmallInteger('status');
             $table->timestamps();
+        });
 
-            $table->index('kind_id');
+        Schema::create('pet_color', function (Blueprint $table) {
+            $table->bigIncrements('pet_id');
+            $table->unsignedBigInteger('color_id');
+            $table->primary(['pet_id', 'color_id']);
         });
     }
 
@@ -31,6 +34,7 @@ class CreateBreedsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('breeds');
+        Schema::dropIfExists('colors');
+        Schema::dropIfExists('pet_color');
     }
 }

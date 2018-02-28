@@ -20,6 +20,14 @@ class CreatePostsTable extends Migration
             $table->json('data');
             $table->unsignedSmallInteger('status');
             $table->timestamps();
+
+            $table->index('author_id');
+        });
+
+        Schema::create('pet_post', function (Blueprint $table) {
+            $table->bigIncrements('pet_id');
+            $table->unsignedBigInteger('post_id');
+            $table->primary(['pet_id', 'post_id']);
         });
     }
 
@@ -31,5 +39,6 @@ class CreatePostsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('posts');
+        Schema::dropIfExists('pet_post');
     }
 }

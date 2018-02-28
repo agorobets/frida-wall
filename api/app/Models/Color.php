@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Kind extends Model
+class Color extends Model
 {
     /**
      * @var array
