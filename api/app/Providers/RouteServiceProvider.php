@@ -23,7 +23,13 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Route::pattern('id', '[0-9]+');
+        Route::pattern('color', '[0-9]+');
+        Route::pattern('kind', '[0-9]+');
+        Route::pattern('breed', '[0-9]+');
+        Route::pattern('pet', '[0-9]+');
+        Route::pattern('post', '[0-9]+');
+        Route::pattern('user', '[0-9]+');
 
         parent::boot();
     }

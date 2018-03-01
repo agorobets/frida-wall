@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Pet extends Model
 {
+    use SoftDeletes;
+
     /**
      * @var array
      */
@@ -18,11 +21,9 @@ class Pet extends Model
      * @var array
      */
     protected $dates = [
-        self::CREATED_AT,
-        self::UPDATED_AT,
-
         'born_at',
         'died_at',
+        'deleted_at',
     ];
 
     /**

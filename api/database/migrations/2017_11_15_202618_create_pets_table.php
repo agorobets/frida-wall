@@ -27,6 +27,7 @@ class CreatePetsTable extends Migration
             $table->string('gender', 1)->nullable();
             $table->unsignedSmallInteger('status');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->index('owner_id');
             $table->index('kind_id');

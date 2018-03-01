@@ -21,7 +21,7 @@ class CreateColorsTable extends Migration
         });
 
         Schema::create('pet_color', function (Blueprint $table) {
-            $table->bigIncrements('pet_id');
+            $table->unsignedBigInteger('pet_id');
             $table->unsignedBigInteger('color_id');
             $table->primary(['pet_id', 'color_id']);
         });

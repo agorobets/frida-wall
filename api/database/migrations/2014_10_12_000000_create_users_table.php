@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->unsignedSmallInteger('status');
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

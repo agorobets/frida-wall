@@ -20,12 +20,13 @@ class CreatePostsTable extends Migration
             $table->json('data');
             $table->unsignedSmallInteger('status');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->index('author_id');
         });
 
         Schema::create('pet_post', function (Blueprint $table) {
-            $table->bigIncrements('pet_id');
+            $table->unsignedBigInteger('pet_id');
             $table->unsignedBigInteger('post_id');
             $table->primary(['pet_id', 'post_id']);
         });
