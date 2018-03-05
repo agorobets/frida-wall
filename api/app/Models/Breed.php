@@ -20,12 +20,4 @@ class Breed extends Model
     {
         return $this->belongsTo(Kind::class);
     }
-
-    /**
-     * @param string $name
-     */
-    public function setNameAttribute(string $name)
-    {
-        $this->attributes['name'] = ucfirst($name);
-    }
 }

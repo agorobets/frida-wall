@@ -15,8 +15,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::prefix('v1')->group(function() {
-    Route::apiResource('pets', 'PetController');
+
+    Route::put('colors/{color}/display', 'ColorController@display');
+    Route::put('colors/{color}/hide', 'ColorController@hide');
+
     Route::apiResource('colors', 'ColorController');
+
+    Route::apiResource('pets', 'PetController');
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {

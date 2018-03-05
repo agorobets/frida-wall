@@ -5,6 +5,14 @@ namespace App\Models;
 use App\Models\Constants\ListItemStatus;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Color
+ * @package App\Models
+ *
+ * @property int $id
+ * @property string $name
+ * @property int $status
+ */
 class Color extends Model
 {
     /**
@@ -18,12 +26,4 @@ class Color extends Model
      * @var array
      */
     protected $fillable = ['name'];
-
-    /**
-     * @param string $name
-     */
-    public function setNameAttribute(string $name)
-    {
-        $this->attributes['name'] = ucfirst($name);
-    }
 }

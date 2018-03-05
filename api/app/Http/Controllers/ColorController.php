@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ColorRequest;
 use App\Http\Resources\ColorResource;
 use App\Models\Color;
-use Illuminate\Http\Request;
+use App\Models\Constants\ListItemStatus;
 
 class ColorController extends Controller
 {
@@ -20,16 +21,13 @@ class ColorController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param ColorRequest $request
      * @return ColorResource
      */
-    public function store(Request $request)
+    public function store(ColorRequest $request)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|unique:colors|max:255'
-        ]);
-
-        $color = Color::create($validatedData);
+        $request->validated();
+        $color = Color::create($request->validated());
         return new ColorResource($color);
     }
 
@@ -47,28 +45,64 @@ class ColorController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  ColorRequest  $request
      * @param  \App\Models\Color  $color
-     * @return \Illuminate\Http\Response
+     * @return ColorResource
      */
-    public function update(Request $request, Color $color)
+    public function update(ColorRequest $request, Color $color)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|unique:colors|max:255'
-        ]);
-
-        $color->fill($validatedData);
+        $request->validate();
+        $color->fill($request->validated());
         $color->save();
+
+        return new ColorResource($color);
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Color  $color
-     * @return \Illuminate\Http\Response
+     * @return ColorResource
      */
     public function destroy(Color $color)
     {
-        //
+        $color->delete();
+
+        return new ColorResource($color);
+    }
+
+    /**
+     * Hides color
+     *
+     * @param Color $color
+     * @return ColorResource
+     */
+    public function hide(Color $color)
+    {
+        return $this->setStatus($color, ListItemStatus::DISPLAY);
+    }
+
+    /**
+     * Displays color
+     *
+     * @param Color $color
+     * @return ColorResource
+     */
+    public function display(Color $color)
+    {
+        return $this->setStatus($color, ListItemStatus::DISPLAY);
+    }
+
+    /**
+     * @param Color $color
+     * @param int $status
+     * @return ColorResource
+     */
+    protected function setStatus(Color $color, int $status)
+    {
+        $color->status = $status;
+        $color->save();
+
+        return new ColorResource($color);
     }
 }
