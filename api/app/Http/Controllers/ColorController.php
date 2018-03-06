@@ -9,7 +9,6 @@ use App\Models\Constants\ListItemStatus;
 
 class ColorController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      *
@@ -26,8 +25,9 @@ class ColorController extends Controller
      */
     public function store(ColorRequest $request)
     {
-        $request->validated();
+        $request->validate();
         $color = Color::create($request->validated());
+
         return new ColorResource($color);
     }
 
@@ -79,7 +79,7 @@ class ColorController extends Controller
      */
     public function hide(Color $color)
     {
-        return $this->setStatus($color, ListItemStatus::DISPLAY);
+        return $this->setStatus($color, ListItemStatus::HIDDEN);
     }
 
     /**

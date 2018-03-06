@@ -21,6 +21,16 @@ Route::prefix('v1')->group(function() {
 
     Route::apiResource('colors', 'ColorController');
 
+    Route::put('kinds/{kind}/display', 'KindController@display');
+    Route::put('kinds/{kind}/hide', 'KindController@hide');
+
+    Route::apiResource('kinds', 'KindController');
+
+    Route::put('breeds/{breed}/display', 'BreedController@display');
+    Route::put('breeds/{breed}/hide', 'BreedController@hide');
+
+    Route::apiResource('breeds', 'BreedController');
+
     Route::apiResource('pets', 'PetController');
 });
 
